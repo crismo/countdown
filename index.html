@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap">
+    <title>Countdown</title>
+    <style>
+        body {
+            background: #f3f3f3;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+        }
+
+        .countdown {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            width: 80vw;
+            height: 60vh;
+        }
+
+        .time-part {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-grow: 1;
+            aspect-ratio: 1/1;
+            background: #007BFF;
+            color: #fff;
+            padding: 2vw;
+            border-radius: 4px;
+            margin: 1vw;
+            font-size: 8vw;
+            text-align: center;
+            font-family: 'Orbitron', sans-serif;
+            min-width: 25vw;
+        }
+    </style>
+</head>
+
+<div class="container">
+    <div id="countdown" class="countdown">
+        <div class="time-part">
+            <span id="hours" class="flip-number">00</span>
+        </div>
+        <div class="time-part">
+            <span id="minutes" class="flip-number">00</span>
+        </div>
+        <div class="time-part">
+            <span id="seconds" class="flip-number">00</span>
+        </div>
+    </div>
+</div>
+
+
+
+<body>
+
+
+    <script>
+
+        const countdownElem = document.getElementById('countdown');
+        const hoursElem = document.getElementById('hours');
+        const minutesElem = document.getElementById('minutes');
+        const secondsElem = document.getElementById('seconds');
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const dm = (urlParams.get('m') || 0) * 60;
+        const dh = (urlParams.get('h') || 0) * 60 * 60;
+        const ds = (urlParams.get('s') || 0) * 1;
+        const msg = urlParams.get('msg') || "END";
+
+        const duration = ds + dm + dh;
+
+        if (duration) {
+
+            const countdownTime = Date.now() + duration * 1000;
+            let prevHours = 0, prevMinutes = 0, prevSeconds = 0;
+
+            const formatTime = (time) => time < 10 ? `0${time}` : time;
+
+            const intervalId = setInterval(function () {
+                const now = Date.now();
+                const distance = countdownTime - now;
+
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                hoursElem.innerText = formatTime(hours);
+                minutesElem.innerText = formatTime(minutes);
+                secondsElem.innerText = formatTime(seconds);
+
+                if (distance < 0) {
+                    clearInterval(intervalId);
+                    hoursElem.innerText = "00";
+                    minutesElem.innerText = "00";
+                    secondsElem.innerText = "00";
+                    end();
+                }
+            }, 500);
+        }
+
+
+        function end() {
+            countdownElem.innerHTML = `<h1>${msg}</h1>`
+        }
+
+
+    </script>
+
+</body>
+
+</html>
