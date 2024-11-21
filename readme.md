@@ -10,3 +10,5 @@ Here are some examples:
 - Count down 15 seconds: `https://crismo.github.io/countdown/?s=15`
 - Count down 2 hours and 30 minutes: `https://crismo.github.io/countdown/?h=2&m=30`
 - Count down 1 hour, 30 minutes, 15 seconds, and say "Boo!": `https://crismo.github.io/countdown/?h=1&m=30&s=15&msg=Boo!`
+
+Alternativly there is a button in the left upper corner that toggles a simple settings UI. 

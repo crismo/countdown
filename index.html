@@ -55,24 +55,37 @@
     </style>
 </head>
 
-<div class="container">
-    <div id="countdown" class="countdown">
-        <div class="time-part">
-            <span id="hours" class="flip-number">00</span>
-        </div>
-        <div class="time-part">
-            <span id="minutes" class="flip-number">00</span>
-        </div>
-        <div class="time-part">
-            <span id="seconds" class="flip-number">00</span>
-        </div>
-    </div>
-</div>
-
-
-
 <body>
 
+    <div id="settingsContainer" style="position: absolute;top:0px;left:0px;padding: 10px; display: flex;width: 100%;">
+        <button id="settingsToggle" style="border: 0;flex:0"><img src="data:image/png;base64,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" alt="Settings toggle" style="width: 16px;height: 16px;"></button>
+        <div id="settings" style="flex:1;display:flex;visibility:hidden;justify-content:center;gap: 10px;">
+            <label for="h">Hours</label>
+            <input type="number" id="h" name="h" value="0">
+            <label for="m">Minutes</label>
+            <input type="number" id="m" name="m" value="0">
+            <label for="s">Seconds</label>
+            <input type="number" id="s" name="s" value="0">
+            <label for="msg">Message</label>
+            <input type="text" id="msg" name="msg" value="END">
+            <button id="saveSettings">Save</button>
+        </div>
+    </div>
+
+
+    <div class="container">
+        <div id="countdown" class="countdown">
+            <div class="time-part">
+                <span id="hours" class="flip-number">00</span>
+            </div>
+            <div class="time-part">
+                <span id="minutes" class="flip-number">00</span>
+            </div>
+            <div class="time-part">
+                <span id="seconds" class="flip-number">00</span>
+            </div>
+        </div>
+    </div>
 
     <script>
 
@@ -82,10 +95,10 @@
         const secondsElem = document.getElementById('seconds');
 
         const urlParams = new URLSearchParams(window.location.search);
-        const dm = (urlParams.get('m') || 0) * 60;
-        const dh = (urlParams.get('h') || 0) * 60 * 60;
-        const ds = (urlParams.get('s') || 0) * 1;
-        const msg = urlParams.get('msg') || "END";
+        const dh = (urlParams.get('h') || localStorage.getItem('h') || 0) * 60 * 60;
+        const dm = (urlParams.get('m') || localStorage.getItem('m') || 0) * 60;
+        const ds = (urlParams.get('s') || localStorage.getItem('s') || 0) * 1;
+        const message = urlParams.get('msg') || localStorage.getItem('msg') || "END";
 
         const duration = ds + dm + dh;
 
@@ -118,9 +131,52 @@
             }, 500);
         }
 
-
         function end() {
-            countdownElem.innerHTML = `<h1>${msg}</h1>`
+            countdownElem.innerHTML = `<h1>${message}</h1>`
+        }
+
+        // Settings
+        const settingsToggle = document.getElementById('settingsToggle');
+        const saveSettings = document.getElementById('saveSettings');
+        const h = document.getElementById('h');
+        const m = document.getElementById('m');
+        const s = document.getElementById('s');
+        const msg = document.getElementById('msg');
+
+        persistSettings(dh / 3600, dm / 60, ds, message);
+        populateSettings();
+
+        settingsToggle.addEventListener('click', () => {
+            const settings = document.getElementById('settings');
+            settings.style.visibility = settings.style.visibility === 'hidden' ? 'visible' : 'hidden';
+        });
+
+        saveSettings.addEventListener('click', () => {
+            persistSettings(h.value, m.value, s.value, msg.value);
+            redirectUsingSettings();
+        });
+
+        function redirectUsingSettings() {
+            const url = new URL(window.location.href);
+            url.searchParams.set('h', h.value);
+            url.searchParams.set('m', m.value);
+            url.searchParams.set('s', s.value);
+            url.searchParams.set('msg', msg.value);
+            window.location.href = url;
+        }
+
+        function persistSettings(h, m, s, msg) {
+            localStorage.setItem('h', h);
+            localStorage.setItem('m', m);
+            localStorage.setItem('s', s);
+            localStorage.setItem('msg', msg);
+        }
+
+        function populateSettings() {
+            h.value = localStorage.getItem('h') || 0;
+            m.value = localStorage.getItem('m') || 0;
+            s.value = localStorage.getItem('s') || 0;
+            msg.value = localStorage.getItem('msg') || "END";
         }
 
 
